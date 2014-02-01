@@ -1,2 +1,23 @@
-<h1>Welcome to Bloccit</h1>
-<p id="index-title">This is the home page for Bloccit.</p>
+<div class="hero-unit">
+  <h1>Bloccit</h1>
+  <p>Bloccit is a resource for sharing links with your friends!</p>
+  <p>
+      <%= link_to "Sign In", new_user_session_path, class: 'btn btn-primary btn-large' %> or 
+      <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary btn-large' %> today!
+  </p>
+</div>
+
+<div class="row">
+  <div class="span4">
+    <h2>James Cameron movies</h2>
+    <p>His movies are amazing. I like how he writes his female characters and the fact that he knows how to combine both storytelling with great CGI effects. I always care and identify with the characters, something you don't really experience with many action-laden films. Unfortunately, I really hated Avatar but everything before that has been great.</p>
+  </div>
+  <div class="span4">
+    <h2>The Golden Age of Movies</h2>
+    <p>The best movies I've seen have all been from the 1970s - 1990s. The movies today use so much CGI I feel like I'm watching a video game. Better special effects don't always mean a better movie. A great story is always key.</p>
+  </div>
+  <div class="span4">
+    <h2>Changes in Movie Money</h2>
+    <p>Because of online piracy, studios lose money on DVD sales. This unfortunately leads to less money being available for smaller, "indie" flicks.</p>
+  </div>
+</div>
