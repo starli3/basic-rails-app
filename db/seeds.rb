@@ -27,8 +27,9 @@ rand(4..10).times do
         body: Faker::Lorem.paragraphs(rand(1..2)).join("\n"))
     end
   end
+end
 
-  u = User.first
+u = User.first
 u.skip_reconfirmation!
 u.update_attributes(email: 'star.estella.li@gmail.com', password: 'helloworld', password_confirmation: 'helloworld')
 
@@ -37,5 +38,5 @@ puts "#{User.count} users created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
 
-end
+
 
