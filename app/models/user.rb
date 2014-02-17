@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   has_many :posts
 
-  before_create :set_member
+  before_create :set_member    ##before user is created, call his method
 
   mount_uploader :avatar, AvatarUploader # add this line
 
@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 
   private
 
-  def set_member
+  def set_member     #this is the method to set any new user as a member. 
     self.role = 'member'
   end
   

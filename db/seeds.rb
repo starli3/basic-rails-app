@@ -1,7 +1,7 @@
 require 'faker'
 
 # Create 15 topics
-topics = []
+topics = []    ##creating array of topics
 15.times do
   topics << Topic.create(
     name: Faker::Lorem.words(rand(1..10)).join(" "), 

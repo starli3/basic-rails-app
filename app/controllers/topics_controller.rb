@@ -1,6 +1,7 @@
 class TopicsController < ApplicationController
   def index
-    @topics = Topic.all
+    ## @topics = Topic.all - this line was removed as requested by the Pagination checkpoint. 
+    @topics = Topic.paginate(page: params[:page], per_page: 10) #this line was added from Pagination checkpoint. 
   end
 
   def new
@@ -10,7 +11,8 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
-    @posts = @topic.posts
+    @posts = @topic.posts.paginate(page: params[:page], per_page: 10)  ## calling paginate on collection of posts. We are instructing paginate to render 10 posts/topic per page.
+    ## @posts = @topic.posts (this line was removed as requested by Pagination checkpoint).
   end
 
   def edit

@@ -1,7 +1,7 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
+  def initialize(user)     ##only write initialize method when you want to run code whenever an object is created based on that class. 
     user ||= User.new # guest user
 
     # if a member, they can manage their own posts 
