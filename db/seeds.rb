@@ -40,6 +40,18 @@ rand(4..10).times do
     rand(3..7).times do
       p.comments.create(
         body: Faker::Lorem.paragraphs(rand(1..2)).join("\n"))
+
+
+    post_count = Post.count   ##we're just looking at how many posts there are in the DB already
+    User.all.each do |user|   ##it's finding a random post that the user already has
+    rand(30..50).times do  ##this happens between 30 and 50 times
+    p = Post.find(rand(1..post_count))   ##This code assumes you have a section in seeds that creates a bunch of Posts
+    c = user.comments.create(
+      body: Faker::Lorem.paragraphs(rand(1..2)).join("\n"),
+      post: p)
+    c.update_attribute(:created_at, Time.now - rand(600..31536000))
+    end
+  
     end
   end
 end

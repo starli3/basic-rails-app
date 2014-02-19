@@ -1,4 +1,8 @@
 class Comment < ActiveRecord::Base
   belongs_to :post    ##each comment belongs to post
-  attr_accessible :body    ##allows us to change body
+  belongs_to :user  
+  attr_accessible :body, :post    ##allows us to change body
+
+  validates :body, length: { minimum: 5 }, presence: true
+  validates :user, presence: true
 end
