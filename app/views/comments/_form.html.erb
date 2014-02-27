@@ -1,14 +1,16 @@
-<%= form_for [topic, post, comment], html: { class: 'form-horizontal' } do |f| %>
+<%= form_for [topic, post, comment] do |f| %>
 
-  <%= control_group_tag(comment.errors[:body]) do %>
-    <%= f.label :body, class: 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :body, rows: 8 %>
-    </div>
-  <% end %>
-  <div class="control-group">
-    <div class="controls">
+  <h4>Submit a Comment</h4>
+
+
+  
+
+      <%= f.text_area :body, rows: 8, class: 'span8' %>
+
+
+
+  
+   
       <%= f.submit "Save", class: 'btn' %>
-    </div>
-  </div>
+ 
 <% end %>

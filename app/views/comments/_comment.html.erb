@@ -1,8 +1,18 @@
-<div class="media">
-  <%= link_to '#', class: 'pull-left' do %>
-  <% end %>
-  <div class="media-body">
-    <small><%= comment.user.name %> commented <%= time_ago_in_words(comment.created_at) %> ago</small>
-    <p><%= comment.body %></p>
+<div class="row">
+  <div class="span8">
+    <p class="lead"><%= @Comments %></p>
+    <% @comments.each do |comment| %>
+      <div class="media">
+        <div class="media-body">
+          <h4 class="media-heading">
+            <%=  markdown comment.body %>
+          </h4>
+          <small>
+            submitted <%= time_ago_in_words(comment.created_at) %> ago by 
+            <%= comment.user.name %><br/>
+          </small>
+        </div>
+      </div>
+    <% end %>
   </div>
-</div>
+  </div>

@@ -31,6 +31,19 @@ class TopicsController < ApplicationController
     end
   end
 
+  def destroy
+    @topic = Topic.find(params[:id])
+    name = @topic.name     ##We are simply grabbing the topic to destroy. Similar to calling save in our create method, we call the Active Record destroy method on @topic:
+    authorize! :destroy, @topic, message: "You need to own the topic to delete it."
+    if @topic.destroy      ##Just like save, this will return true or false based on whether or not the topic was successfully deleted.
+      flash[:notice] = "\"#{name}\" was deleted successfully."
+      redirect_to topics_path
+    else
+      flash[:error] = "There was an error deleting the topic."
+      render :show
+    end
+  end
+
   def update
     @topic = Topic.find(params[:id])
     authorize! :update, @topic, message: "You need to own the topic to update it."

@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
     @comments = @post.comments  ##not needed
 
     @comment = current_user.comments.build(params[:comment])   ##first line builds a comment in the context of the current_user and the params
-    @comment.post = @post      ##second line adds the post_id to the comment (before you save)
+    @comment.post = @post ##second line adds the post_id to the comment (before you save)
 
     authorize! :create, @comment, message: "You need be signed in to do that."
     if @comment.save

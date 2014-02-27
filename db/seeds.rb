@@ -44,8 +44,8 @@ rand(4..10).times do     ##every thing between lines 13 to 57 happens 4 to 10 ti
 
     rand(5..12).times do    
       c = u.comments.create(   
-        post: p     ##p is what you set post to earlier in the file
-        body: Faker::Lorem.paragraphs(rand(1..4)).join("\n"))   
+        post: p,     ##p is what you set post to earlier in the file
+        body: Faker::Lorem.paragraphs(rand(1..4)).join("\n"))
     end
   end
 end
