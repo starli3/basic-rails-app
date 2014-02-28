@@ -2,7 +2,8 @@ class PostsController < ApplicationController
   def show
     @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])  ##params hash is passed around on every request. It can be populated with many things, but in this case, it is populated with a post ID. Params is a hash, and that's why you can extract a value by specifying the key, which is the :id in this case. 
-    @comments = @post.comments  
+    @comments = @post.comments
+
     @comment = Comment.new
   end
 

@@ -5,8 +5,7 @@ class CommentsController < ApplicationController
   ##@post = Post.find(params[:post_id])  could also be written like this
     @comments = @post.comments  ##not needed
 
-    @comment = current_user.comments.build(params[:comment])   ##first line builds a comment in the context of the current_user and the params
-    @comment.post = @post ##second line adds the post_id to the comment (before you save)
+    @comment = current_user.comments.build(params[:comment])   ##first line builds a comment in the context of the current_user and the params@comment.post = @post   ##second line adds the post_id to the comment (before you save)
 
     authorize! :create, @comment, message: "You need be signed in to do that."
     if @comment.save
@@ -16,4 +15,21 @@ class CommentsController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    @topic = Topic.find(params[:topic_id])
+    @post = @topic.posts.find(params[:post_id])
+
+    @comment = @post.comments.find(params[:id])
+
+    authorize! :destroy, @comment, message: "You need to own the comment to delete it."
+    if @comment.destroy
+      flash[:notice] = "Comment was removed."
+      redirect_to [@topic, @post]
+    else
+      flash[:error] = "Comment couldn't be deleted. Try again."
+      redirect_to [@topic, @post]
+    end
+  end
+  
 end

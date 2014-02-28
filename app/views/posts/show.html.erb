@@ -12,7 +12,10 @@
 
   <%= render partial: 'comments/form', locals: { topic: @topic, post: @post, comment: Comment.new } %> 
 
+
+
   <%= render @comments, locals: { topic: @topic, post: @post } %> 
+
 
   </div>
   <div class="span4">
