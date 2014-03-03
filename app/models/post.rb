@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy    ##we can assign each comment to a post; This code will delete any dependent comments when a post is deleted
   has_many :votes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   belongs_to :user      ##each post belongs to user
   belongs_to :topic      ##each post belongs to a topic
   attr_accessible :body, :title, :topic, :image   ##allows us to change body, title, topic
