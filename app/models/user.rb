@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   
   has_many :posts      ## we're defining database relationships. these are not options. we are setting up different methods that can be called. 
   has_many :comments
+  has_many :votes, dependent: :destroy
 
   before_create :set_member    ##before user is created, call his method
 
