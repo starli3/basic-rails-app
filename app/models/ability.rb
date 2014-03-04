@@ -7,10 +7,11 @@ class Ability
     # if a member, they can manage their own posts 
     # (or create new ones)
     if user.role? :member
-      can :manage, Post, :user_id => user.id
-      can :manage, Comment, :user_id => user.id
+      can :manage, Post, user_id: user.id
+      can :manage, Comment, user_id: user.id
       can :create, Vote
       can :manage, Favorite, user_id: user.id
+      can :read, Topic
     end
 
     # Moderators can delete any post or comment
@@ -24,6 +25,8 @@ class Ability
       can :manage, :all
     end
 
-    can :read, :all     ##users who are not members, moderators, or admin can read anything
+    ## can :read, :all     ##users who are not members, moderators, or admin can read anything
+    can :read, Topic, public: true
+    can :read, Post
   end
 end
