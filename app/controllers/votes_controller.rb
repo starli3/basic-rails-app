@@ -13,10 +13,10 @@ class VotesController < ApplicationController
 
   private
 
-  def setup
+  def setup    #Because setup is called by a before_filter, the authorization with be checked every time a vote is submitted.
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.find(params[:post_id])
-    authorize! :create, Vote, message: "You need to be a user to do that."
+    authorize! :create, Vote, message: "You need to be a user to do that."    #the setup method has authorize so that only Bloccit members can vote
 
     @vote = @post.votes.where(user_id: current_user.id).first
   end

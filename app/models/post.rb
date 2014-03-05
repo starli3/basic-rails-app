@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy    ##we can assign each comment to a post; This code will delete any dependent comments when a post is deleted
-  has_many :votes, dependent: :destroy
-  has_many :favorites, dependent: :destroy
+  has_many :votes, dependent: :destroy  # A Vote should not exist without a Post, so account for that if a Post is destroyed
+  has_many :favorites, dependent: :destroy   # An instance of favorite can not exist without an associated post 
   belongs_to :user      ##each post belongs to user
   belongs_to :topic      ##each post belongs to a topic
   attr_accessible :body, :title, :topic, :image   ##allows us to change body, title, topic
@@ -17,16 +17,16 @@ class Post < ActiveRecord::Base
 
   ## mount_uploader :image, ImageUploader
 
-  def up_votes
+  def up_votes                            # We'll want a way to see only "up" or "down" votes
     self.votes.where(value: 1).count
   end
 
-  def down_votes
+  def down_votes                          # We'll want a way to see only "up" or "down" votes
     self.votes.where(value: -1).count
   end  
 
   def points
-    self.votes.sum(:value).to_i
+    self.votes.sum(:value).to_i           # This allows us to see the total score of a post, based on the sum of "up" and "down" votes
   end
 
   def update_rank

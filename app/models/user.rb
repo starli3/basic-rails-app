@@ -5,17 +5,20 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, 
          :omniauthable, :omniauth_providers => [:facebook]  ##basic devise user option set -  you can do x, y, z
 
+  # Devise needs to understands that sign-up may be authenticated with Facebook. The omniauthable declaration will also generate a "Sign in with Facebook" link on users/sign_up
   # Setup accessible (or protected) attributes for your model
+  
   attr_accessible :email, :password, :password_confirmation, 
                   :remember_me, :name, :provider, :uid, :email_favorites
+
+  # provider and uid attributes will be used to determine the type of authentication used for each user. 
 
   # attr_accessible :title, :body
   
   has_many :posts      ## we're defining database relationships. these are not options. we are setting up different methods that can be called. 
   has_many :comments
-  has_many :votes, dependent: :destroy
-  has_many :favorites, dependent: :destroy
-
+  has_many :votes, dependent: :destroy   # A Vote should not exist without a Post, so account for that if a Post is destroyed
+  has_many :favorites, dependent: :destroy   # An instance of favorite can not exist without an associated user 
   before_create :set_member    ##before user is created, call his method
 
   ROLES = %w[member moderator admin]
@@ -23,8 +26,12 @@ class User < ActiveRecord::Base
     role.nil? ? false : ROLES.index(base_role.to_s) <= ROLES.index(role)
   end
 
-  def favorited(post)
+  def favorited(post)    #To toggle between favorite and un-favorite states, this method which will let you know if a given user has favorited a post
     self.favorites.where(post_id: post.id).first
+  end
+
+  def voted(post)    #This method takes a post object and determines if the user has any votes on that post object.
+    self.votes.where(post_id: post.id).first
   end
 
   private
@@ -52,5 +59,4 @@ class User < ActiveRecord::Base
     user
   end
 
-  
 end

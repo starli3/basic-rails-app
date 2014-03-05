@@ -9,7 +9,7 @@ class Ability
     if user.role? :member
       can :manage, Post, user_id: user.id
       can :manage, Comment, user_id: user.id
-      can :create, Vote
+      can :create, Vote                         # vote permission
       can :manage, Favorite, user_id: user.id
       can :read, Topic
     end
@@ -17,12 +17,12 @@ class Ability
     # Moderators can delete any post or comment
     if user.role? :moderator
       can :destroy, Post
-      can :destroy, Comment
+      can :destroy, Comment  
     end
 
     # Admins can do anything
     if user.role? :admin
-      can :manage, :all
+      can :manage, :all  ##Admins are set to do anything
     end
 
     ## can :read, :all     ##users who are not members, moderators, or admin can read anything
