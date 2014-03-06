@@ -23,4 +23,11 @@ module ApplicationHelper
     end
     super *[collection_or_options, options].compact
   end
+
+  def comment_url_helper(comment)  #This method will return an array of topic, post and comment objects. 
+    post = comment.post
+    topic = post.topic
+    [topic, post, comment]
+  end
+
 end

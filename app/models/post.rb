@@ -7,6 +7,8 @@ class Post < ActiveRecord::Base
   attr_accessible :body, :title, :topic, :image   ##allows us to change body, title, topic
 
   default_scope order('rank DESC')  ## whenever we pull up collection of posts, the newest post created will pop up
+  scope :visible_to, lambda { |user| user ? scoped : joins(:topic).where('topics.public' => true) }
+  #We are using a lambda to ensure that a user is signed in. If the user is not signed in, we reference the topic model using the joins method to only display posts for publicly scoped topics.
 
   validates :title, length: { minimum: 5}, presence: true  ## presence -title can't be blank; validation prevents it from being saved
   validates :body, length: {minimum: 20}, presence: true    ## presence -title can't be blank

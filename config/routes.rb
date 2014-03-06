@@ -6,6 +6,8 @@ Bloccit::Application.routes.draw do
 
   #This declaration instructs the redirect to look for a controller in the users/ directory, by the name of omniauth_callbacks_controller.rb
 
+  resources :users, only: [:show] # create a route for users#show
+
   resources :topics do
     resources :posts, except: [:index] do
       resources :comments, only: [:create, :destroy]   ##the resources command generates a bunch of routes, so the only: [:create] tells it to only make one for the create action

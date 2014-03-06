@@ -9,7 +9,7 @@
             submitted <%= time_ago_in_words(comment.created_at) %> ago by 
             <%= comment.user.name %><br/>
             <% if can? :destroy, comment %>
-        |     <%= link_to "Delete", [@topic, @post, comment], method: :delete %>
+               <%= link_to "Delete", [@topic, @post, comment], method: :delete %>
             <% end %> 
           </small>
         </div>
@@ -24,7 +24,7 @@
     <small>
       <%= comment.user.name %> commented <%= time_ago_in_words(comment.created_at) %> ago
       <% if can? :destroy, comment %>
-        | <%= link_to "Delete", [@topic, @post, comment], method: :delete %>
+        | <%= link_to "Delete", comment_url_helper(comment), method: :delete %>
       <% end %>
     </small>
     <p><%= comment.body %></p>
