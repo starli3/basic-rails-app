@@ -12,7 +12,7 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     authorize! :read, @topic, message: "You need to be signed-in to do that."
-    @posts = @topic.posts.paginate(page: params[:page], per_page: 10)  ## calling paginate on collection of posts. We are instructing paginate to render 10 posts/topic per page.
+    @posts = @topic.posts.includes(:user).paginate(page: params[:page], per_page: 10)
     ## @posts = @topic.posts (this line was removed as requested by Pagination checkpoint).
   end
 
