@@ -15,7 +15,7 @@ class Post < ActiveRecord::Base
   validates :topic, presence: true    ##topic is ID
   validates :user, presence: true     ##user is ID
 
-  after_create :create_vote
+  after_create :create_vote  #If user submits post, they'll want to vote it up. 
 
   ## mount_uploader :image, ImageUploader
 

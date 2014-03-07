@@ -1,5 +1,5 @@
 class Vote < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user   #each vote belongs to user
   belongs_to :post
   attr_accessible :value, :post
   validates :value, inclusion: { in: [-1, 1], message: "%{value} is not a valid vote." }   #We need to rank the posts after each vote is cast
