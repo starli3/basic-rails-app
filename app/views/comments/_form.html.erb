@@ -1,15 +1,8 @@
-<%= form_for [topic, post, comment] do |f| %>
+<%= form_for [topic, post, comment], remote: true do |f| %>
 
   <h4>Submit a Comment</h4>
 
-
-  
-
       <%= f.text_area :body, rows: 8, class: 'span8' %>
-
-
-
-  
    
       <%= f.submit "Save", class: 'btn' %>
  
