@@ -33,5 +33,4 @@ class CommentsController < ApplicationController
       f.html { redirect_to [@topic, @post]}
     end
   end
-  
 end
