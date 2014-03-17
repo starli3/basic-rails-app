@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :votes, dependent: :destroy   # A Vote should not exist without a Post, so account for that if a Post is destroyed
   has_many :favorites, dependent: :destroy   # An instance of favorite can not exist without an associated user 
-  before_create :set_member    ##before user is created, call his method
+  before_create :set_member    #The before_create method will call the set_member method before a new user is created
 
   def self.top_rated
     self.select('users.*'). # Select all attributes of the user
@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def favorited(post)    #To toggle between favorite and un-favorite states, this method which will let you know if a given user has favorited a post
-    self.favorites.where(post_id: post.id).first
+    self.favorites.where(post_id: post.id).first #returns a Post object if the post parameter exists in the users's favotires, otherwise nil
   end
 
   # This favorited method lets you know if a given user has favorited a post. 
@@ -48,6 +48,8 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  #The private declaration ensures that set_member can never be called outside of the User class. This is a security measure, because you don't want set_member to be called from anywhere else in the application.
 
   def set_member     #this is the method to set any new user as a member. 
     self.role = 'member'

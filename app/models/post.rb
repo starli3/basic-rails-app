@@ -1,10 +1,16 @@
-class Post < ActiveRecord::Base
+class Post < ActiveRecord::Base   #all models in Rails inherit from ActiveRecord::Base. This inheritance provides methods that your model will need to interact with tables in the database. 
   has_many :comments, dependent: :destroy    ##we can assign each comment to a post; This code will delete any dependent comments when a post is deleted
+  
+  #The has_many method tells Rails that a post object can have many comments related to it, and also provides methods that enable you to retrieve comments that belong to a post.
+
+  #Note: you created the database relationship for posts and comments when you generated the Comment model with post:references, and now you created a way to access related comments from a post with has_many.
+
   has_many :votes, dependent: :destroy  # A Vote should not exist without a Post, so account for that if a Post is destroyed
   has_many :favorites, dependent: :destroy   # An instance of favorite can not exist without an associated post 
+
   belongs_to :user      ##each post belongs to user
   belongs_to :topic      ##each post belongs to a topic
-  attr_accessible :body, :title, :topic, :image   ##allows us to change body, title, topic
+  attr_accessible :body, :title, :topic, :image   ##allows the user to change body, title, topic
 
   default_scope order('rank DESC')  ## whenever we pull up collection of posts, the newest post created will pop up
   scope :visible_to, lambda { |user| user ? scoped : joins(:topic).where('topics.public' => true) }
@@ -15,7 +21,7 @@ class Post < ActiveRecord::Base
   validates :topic, presence: true    ##topic is ID
   validates :user, presence: true     ##user is ID
 
-  after_create :create_vote  #If user submits post, they'll want to vote it up. 
+  after_create :create_vote  #Default voting - If a user submits a post, he'll want to vote it up. 
 
   ## mount_uploader :image, ImageUploader
 

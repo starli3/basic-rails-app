@@ -1,6 +1,6 @@
 class CreatePosts < ActiveRecord::Migration
-  def change
-    create_table :posts do |t|
+  def change    #The change method signifies that a database change will happen as a result of running the method
+    create_table :posts do |t|    #The create_table method takes a Symbol argument which represents the table name, and a block argument that contains the details to be added to the table
       t.string :title
       t.text :body
 

@@ -1,5 +1,5 @@
-class Ability
-  include CanCan::Ability
+class Ability    #The ability class allows you to define user permissions. Created from the Cancan gem. 
+  include CanCan::Ability     #authorization gem = user has ability to do what they want to do
 
   def initialize(user)     ##only write initialize method when you want to run code whenever an object is created based on that class. 
     user ||= User.new # guest user

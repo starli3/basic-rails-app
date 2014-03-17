@@ -44,6 +44,8 @@ gem 'rails_12factor'
 
 gem 'cancan'
 
+#Cancan is a gem that allows you to authorize different users for different tasks in your app. For example, you may want to restrict certain actions to an admin user, like deleting posts. 
+
 gem 'redcarpet'
 
 gem 'figaro'

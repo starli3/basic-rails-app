@@ -10,6 +10,9 @@ class Topics::PostsController < ApplicationController
   def new
     @topic = Topic.find(params[:topic_id])
     @post = Post.new
+
+    #You created an instance variable named @post and assigned it to the return of Post.new, which is an empty Post object. Now you have the ability to access a new Post object on the related view, which is app/views/posts/new.html.erb
+
     authorize! :create, Post, message: "You need to be a member to create a new post."
   end
 
